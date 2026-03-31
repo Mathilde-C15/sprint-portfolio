@@ -1,0 +1,43 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+header .header-container {
+  background-color: rgba(170, 174, 127, 0.498);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 80%;
+  max-width: 95%;
+  height: 60px;
+  border-radius: 100px;
+  margin: 2em 0;
+  padding: 0 2em;
+  box-shadow: 5px 5px 10px;
+}
+header .header-container:hover {
+  display: flex;
+}
+header .header-container .nav-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 55%;
+}
+header .header-container img {
+  width: 50px;
+  height: auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(15, 39, 6);
+}
+
+/*# sourceMappingURL=style.css.map */

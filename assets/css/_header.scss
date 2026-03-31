@@ -1,0 +1,35 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .header-container{
+        background-color: $header-bg;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 80%;
+        max-width: 95%;
+        height: 60px;
+        border-radius: 100px;
+        margin: 2em 0;
+        padding: 0 2em;
+        box-shadow: 5px 5px 10px;
+        
+        &:hover {
+            display: flex;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            width: 55%
+        }
+
+        img {
+            width: 50px;
+            height: auto;
+        }
+    }
+}
