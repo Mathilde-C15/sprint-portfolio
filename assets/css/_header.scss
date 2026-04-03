@@ -15,7 +15,6 @@ header {
         border-radius: 100px;
         margin: 2em 0;
         padding: 0 2em;
-        box-shadow: 5px 5px 10px;
         
         &:hover {
             display: flex;
@@ -25,6 +24,7 @@ header {
             display: flex;
             justify-content: space-between;
             width: 55%
+            
         }
 
         img {

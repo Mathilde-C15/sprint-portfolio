@@ -2,7 +2,7 @@
 
 namespace Models;
 
-class Categorie{
+class Category{
     private int $id;
     private string $name;
 

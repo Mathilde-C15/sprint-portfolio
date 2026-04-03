@@ -15,7 +15,6 @@ header .header-container {
   border-radius: 100px;
   margin: 2em 0;
   padding: 0 2em;
-  box-shadow: 5px 5px 10px;
 }
 header .header-container:hover {
   display: flex;

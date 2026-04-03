@@ -64,4 +64,10 @@ class ProjectRepository{
 
         return $project;
     }
+
+    // Supprimer un projet
+    public function deleteProject(int $id){
+        $stmt = $this->pdo->prepare("DELETE FROM project WHERE id = :id");
+        return $stmt->execute(['id' => $id]);
+    }
 }

@@ -10,10 +10,11 @@ class User {
     private string $familyName;
     private string $password;
     private string $description;
-    private $birthdate;
+    private date $birthdate;
     private string $github;
     private string $linkedin;
     private string $cv;
+    private int $idPicture;
 
     public function __construct(int $id, 
                                 int $phone, 
@@ -22,7 +23,7 @@ class User {
                                 string $familyName, 
                                 string $password, 
                                 string $description, 
-                                $birthdate, 
+                                date $birthdate, 
                                 string $github, 
                                 string $linkedin, 
                                 string $cv) {
@@ -68,7 +69,7 @@ class User {
         return $this->description;
     }
 
-    public function getBirthdate() {
+    public function getBirthdate(): date {
         return $this->birthdate;
     }
 
