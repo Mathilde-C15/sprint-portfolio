@@ -1,0 +1,46 @@
+@use 'variables' as v;
+
+.profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: v.$text-color;
+    width: 90%;
+    margin: auto;
+
+    h1 {
+        margin: 1em 0;
+    }
+
+    .profil-container {
+        display: flex;
+        flex-direction: column;
+
+        .description {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            .contact-btn {
+                background-color: rgb(143, 97, 97);
+                padding: 1em;
+                margin-top: 2em;
+                border-radius: 10px;
+            }
+        }
+
+        .profil-image {
+            display: flex;
+            justify-content: center;
+            margin-top: 2em;
+        
+            
+            img {
+                width: 60%;
+                height: auto;
+                border: 10px solid green;
+                border-radius: 15%;
+            }
+        }
+    }
+}

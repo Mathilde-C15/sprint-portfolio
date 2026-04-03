@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <title>Document</title>
 </head>
 <body>
@@ -12,14 +13,19 @@
         <div class="header-container">
             <img src="/assets/images/logo-portfolio.svg" alt="logo">
             <div class="nav-bar">
-                <a class="light-dark-mode">A changer</a>
-                <a class="connection">Se connecter</a>
+                <a href="#" class="about">A propos</a>
+                <a href="#" class="projects">Projets</a>
+                <a href="#" class="skills">Compétences</a>
+                <a href="#" class="contact">Contact</a>
+                <a class="light-mode"><i class="fa-solid fa-sun"></i></a>
+                <a class="dark-mode"><i class="fa-regular fa-moon"></i></a>
+                <a href="#" class="connection"><i class="fa-solid fa-lock"></i></a>
             </div>
         </div>
     </header>
 
     <main>
-        <?php include $content ?>
+        <?php include $view ?>
     </main>
 
     <footer>

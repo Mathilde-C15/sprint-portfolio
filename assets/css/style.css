@@ -22,11 +22,76 @@ header .header-container:hover {
 header .header-container .nav-bar {
   display: flex;
   justify-content: space-between;
-  width: 55%;
+  width: 30%;
+  color: white;
+  height: 1em;
+}
+header .header-container .nav-bar a {
+  text-decoration: none;
+  color: white;
+}
+header .header-container .nav-bar .about,
+header .header-container .nav-bar .projects,
+header .header-container .nav-bar .skills,
+header .header-container .nav-bar .contact {
+  display: none;
+}
+header .header-container .nav-bar .dark-mode {
+  display: none;
 }
 header .header-container img {
   width: 50px;
   height: auto;
+  border-radius: 15%;
+}
+
+@media (min-width: 768px) {
+  header .header-container .nav-bar {
+    width: 55%;
+  }
+  header .header-container .nav-bar .about,
+  header .header-container .nav-bar .projects,
+  header .header-container .nav-bar .skills,
+  header .header-container .nav-bar .contact {
+    display: block;
+  }
+}
+.profil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  width: 90%;
+  margin: auto;
+}
+.profil h1 {
+  margin: 1em 0;
+}
+.profil .profil-container {
+  display: flex;
+  flex-direction: column;
+}
+.profil .profil-container .description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profil .profil-container .description .contact-btn {
+  background-color: rgb(143, 97, 97);
+  padding: 1em;
+  margin-top: 2em;
+  border-radius: 10px;
+}
+.profil .profil-container .profil-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+.profil .profil-container .profil-image img {
+  width: 60%;
+  height: auto;
+  border: 10px solid green;
+  border-radius: 15%;
 }
 
 * {
@@ -36,7 +101,7 @@ header .header-container img {
 }
 
 body {
-  background-color: rgb(15, 39, 6);
+  background-color: rgb(21, 54, 8);
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,6 @@
-@import 'variables';
-@import 'header';
+@use 'variables' as v;
+@use 'header';
+@use 'homeProfile';
 
 
 *{
@@ -9,6 +10,6 @@
 }
 
 body {
-    background-color: $dark-bg;
+    background-color: v.$dark-bg;
 }
 

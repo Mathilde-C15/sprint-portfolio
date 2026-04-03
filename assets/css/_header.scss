@@ -1,3 +1,5 @@
+@use 'variables' as v;
+
 header {
     display: flex;
     align-items: center;
@@ -5,7 +7,7 @@ header {
     width: 100%;
 
     .header-container{
-        background-color: $header-bg;
+        background-color: v.$header-bg;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -23,13 +25,50 @@ header {
         .nav-bar {
             display: flex;
             justify-content: space-between;
-            width: 55%
-            
+            width: 30%;
+            color: v.$text-color;
+            height: 1em;
+
+            a {
+                text-decoration: none;
+                color: v.$text-color;   
+            }
+
+            .about,
+            .projects,
+            .skills,
+            .contact {
+                display: none;
+            }       
+
+            .dark-mode {
+                display: none;
+            }
         }
 
         img {
             width: 50px;
             height: auto;
+            border-radius: 15%;
+        }
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    header {
+        .header-container {
+            .nav-bar {
+                width: 55%;
+
+                .about,
+                .projects,
+                .skills,
+                .contact {
+                    display: block;
+                }
+            }
         }
     }
 }
