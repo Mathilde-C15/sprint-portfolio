@@ -5,7 +5,7 @@ header {
   width: 100%;
 }
 header .header-container {
-  background-color: rgba(170, 174, 127, 0.498);
+  background-color: rgba(141, 172, 142, 0.5);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,12 +23,12 @@ header .header-container .nav-bar {
   display: flex;
   justify-content: space-between;
   width: 30%;
-  color: white;
+  color: beige;
   height: 1em;
 }
 header .header-container .nav-bar a {
   text-decoration: none;
-  color: white;
+  color: beige;
 }
 header .header-container .nav-bar .about,
 header .header-container .nav-bar .projects,
@@ -60,9 +60,11 @@ header .header-container img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: beige;
   width: 90%;
   margin: auto;
+  background-color: rgb(142, 173, 143);
+  border-radius: 10px;
 }
 .profil h1 {
   margin: 1em 0;
@@ -75,23 +77,89 @@ header .header-container img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
+  margin: auto;
 }
 .profil .profil-container .description .contact-btn {
   background-color: rgb(143, 97, 97);
   padding: 1em;
   margin-top: 2em;
   border-radius: 10px;
+  text-decoration: none;
+  color: beige;
 }
 .profil .profil-container .profil-image {
   display: flex;
   justify-content: center;
-  margin-top: 2em;
+  margin: 2em 0;
 }
 .profil .profil-container .profil-image img {
   width: 60%;
   height: auto;
-  border: 10px solid green;
+  border: 10px solid rgb(63, 83, 63);
   border-radius: 15%;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  color: beige;
+}
+.contact .contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+  background-color: rgb(142, 173, 143);
+  width: 90%;
+  border-radius: 10px;
+  height: 50%;
+}
+.contact .contact-container h1 {
+  margin: 1em 0;
+}
+.contact .contact-container form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 2em;
+}
+.contact .contact-container form input,
+.contact .contact-container form textarea {
+  width: 100%;
+}
+.contact .contact-container form label {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+.contact .contact-container form .form-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+}
+.contact .contact-container form .form-button-container .form-button {
+  width: 30%;
+  height: 20px;
+}
+.contact .cv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(142, 173, 143);
+  width: 90%;
+  margin: 2em auto;
+  border-radius: 10px;
+  min-height: 150px;
+}
+.contact .cv btn {
+  padding: 10px;
+  border: 2px solid rgb(143, 97, 97);
+  border-radius: 10px;
 }
 
 * {
@@ -101,7 +169,8 @@ header .header-container img {
 }
 
 body {
-  background-color: rgb(21, 54, 8);
+  background-color: rgb(63, 83, 63);
+  min-height: 100vh;
 }
 
 /*# sourceMappingURL=style.css.map */

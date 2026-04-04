@@ -1,6 +1,7 @@
 @use 'variables' as v;
 @use 'header';
 @use 'homeProfile';
+@use 'homeContact';
 
 
 *{
@@ -11,5 +12,6 @@
 
 body {
     background-color: v.$dark-bg;
+    min-height: 100vh;
 }
 

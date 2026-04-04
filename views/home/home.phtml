@@ -5,7 +5,7 @@
         <div class="description">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id sapiente vitae amet saepe voluptatibus culpa et eveniet facere. Deserunt ullam dolorum voluptatem officia minus maxime tempore esse molestias fugiat neque, corrupti facilis aperiam minima magni accusantium voluptate tenetur a, facere autem sunt commodi? Veritatis inventore, porro perferendis sapiente molestiae mollitia?.</p>
 
-            <btn href="#contact"class="contact-btn">Me contacter</btn>
+            <a href="#contact"class="contact-btn">Me contacter</a>
         </div>
 
         <div class="profil-image">
@@ -22,16 +22,21 @@
 
 <!-- Contact -->
  <section class="contact" id="contact">
-    <h1>Me contacter</h1>
-    <div class="contact-container">
+     <div class="contact-container">
+        <h1>Me contacter</h1>
         <form action="" method="post">
+            <label for="name">Votre nom :</label>
             <input type="text" name="name" placeholder="Nom">
+            <label for="email">Votre email :</label>
             <input type="email" name="email" placeholder="Email">
+            <label for="message">Votre message :</label>
             <textarea name="message" placeholder="Message"></textarea>
-            <input type="submit" value="Envoyer">
+            <div class="form-button-container">
+                <input class="form-button" type="submit" value="Envoyer">
+            </div>
         </form>
     </div>
     <div class="cv">
-        <a href="./assets/documents/CV-Mathilde-Cotelle.pdf" download>Télécharger mon CV</a>
+        <btn href="./assets/documents/CV-Mathilde-Cotelle.pdf" download>Télécharger mon CV</a>
     </div>
  </section>

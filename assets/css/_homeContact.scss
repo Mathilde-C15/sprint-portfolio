@@ -1,0 +1,72 @@
+@use 'variables' as v;
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    color: v.$text-color;
+    
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2em;
+        background-color: v.$article-bg;
+        width: v.$article-width;
+        border-radius: v.$border-radius;
+        height: 50%;
+        
+        h1 {
+            margin: 1em 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin-bottom: 2em;
+
+            input,
+            textarea {
+                width: 100%;
+            }
+
+            label {
+                margin-top: 1em;
+                margin-bottom: 0.5em;
+            }
+
+            .form-button-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 1em;
+                .form-button {
+                    width: 30%;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    .cv {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: v.$article-bg;
+        width: v.$article-width;
+        margin: 2em auto;
+        border-radius: v.$border-radius;
+        min-height: 150px;
+        
+        btn {
+            padding: 10px;
+            border: 2px solid v.$btn-bg;
+            border-radius: v.$border-radius;
+        }
+    }
+
+}
