@@ -1,0 +1,15 @@
+@use 'variables' as v;
+
+.page-login {
+  .auth-wrapper {
+    display: grid;
+    place-items: center;
+    min-height: 55vh;
+  }
+
+  .auth-card {
+    width: 100%;
+    background: v.$panel;
+    color: v.$text-dark;
+  }
+}

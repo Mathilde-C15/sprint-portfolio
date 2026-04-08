@@ -1,0 +1,53 @@
+<div class="page-dashboard">
+    <section class="dashboard-toolbar panel">
+        <div>
+            <p class="eyebrow">Dashboard liste</p>
+            <h1><?= ucfirst(htmlspecialchars($type)) ?></h1>
+        </div>
+
+        <div class="toolbar-actions">
+            <a href="index.php?page=dashboard" class="button-secondary">Retour dashboard</a>
+            <a href="index.php?page=dashboard_edit&type=<?= htmlspecialchars($type) ?>" class="button-primary">Ajouter</a>
+        </div>
+    </section>
+
+    <section class="panel listing-panel">
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Infos</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($items as $item) : ?>
+                    <tr>
+                        <td><?= (int) $item->getId() ?></td>
+                        <td><?= htmlspecialchars((string) $item->getName()) ?></td>
+                        <td>
+                            <?php if ($type === 'project') : ?>
+                                <?= htmlspecialchars(mb_strimwidth(strip_tags((string) $item->getDescription()), 0, 90, '...')) ?>
+                            <?php elseif ($type === 'skill') : ?>
+                                Niveau : <?= (int) $item->getLevel() ?>%
+                            <?php else : ?>
+                                Catégorie portfolio
+                            <?php endif; ?>
+                        </td>
+                        <td class="table-actions">
+                            <a href="index.php?page=dashboard_edit&type=<?= htmlspecialchars($type) ?>&id=<?= (int) $item->getId() ?>">Modifier</a>
+                            <?php if ($type === 'project') : ?>
+                                <a href="index.php?page=delete_project&id=<?= (int) $item->getId() ?>" data-confirm="Supprimer ce projet ?">Supprimer</a>
+                            <?php elseif ($type === 'skill') : ?>
+                                <a href="index.php?page=delete_skill&id=<?= (int) $item->getId() ?>" data-confirm="Supprimer cette compétence ?">Supprimer</a>
+                            <?php else : ?>
+                                <a href="index.php?page=delete_category&id=<?= (int) $item->getId() ?>" data-confirm="Supprimer cette catégorie ?">Supprimer</a>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </section>
+</div>

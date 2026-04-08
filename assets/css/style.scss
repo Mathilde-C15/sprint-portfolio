@@ -1,17 +1,8 @@
-@use 'variables' as v;
-@use 'header';
-@use 'homeProfile';
-@use 'homeContact';
+@use 'variables';
+@use 'layout';
+@use 'home';
+@use 'project';
+@use 'dashboard';
+@use 'login';
 
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: v.$dark-bg;
-    min-height: 100vh;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap');

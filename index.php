@@ -1,25 +1,20 @@
 <?php
 
+
 use Services\Router;
 
-spl_autoload_register(function($classname){
-    
-    // var_dump($classname);
-    // remplacer le \ du namespace par un /
-    // et enlever le PascalCase du namespace 
-    $path = lcfirst(str_replace('\\','/',$classname));
-    // var_dump($path);
-    // rajouter l'extention .php au chemin vers mon fichier 
-    $filename = $path.'.php';
-    // var_dump($filename);
-    // On inclut le fichier si il existe 
-    if(file_exists($filename)){
-        include $filename;
+session_start();
+
+spl_autoload_register(function (string $classname): void {
+    $path = lcfirst(str_replace('\\', '/', $classname));
+    $filename = __DIR__ . '/' . $path . '.php';
+
+    if (file_exists($filename)) {
+        require_once $filename;
     }
 });
 
 $page = $_GET['page'] ?? '/';
 
-
 $router = new Router($page);
-$router->getController();
+$router->dispatch();

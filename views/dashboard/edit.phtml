@@ -1,0 +1,157 @@
+<div class="page-dashboard">
+    <section class="dashboard-toolbar panel">
+        <div>
+            <p class="eyebrow">Dashboard édition</p>
+            <h1><?= $item ? 'Modifier' : 'Ajouter' ?> <?= htmlspecialchars($type) ?></h1>
+        </div>
+        <a href="index.php?page=dashboard_list&type=<?= htmlspecialchars($type === 'user' ? 'project' : $type) ?>" class="button-secondary">Retour</a>
+    </section>
+
+    <section class="panel edit-panel">
+        <?php if ($type === 'user') : ?>
+            <form action="index.php?page=save_user" method="post" class="form-grid user-form" id="user-form">
+                <label for="name">Prénom</label>
+                <input type="text" name="name" id="name" value="<?= htmlspecialchars((string) $item?->getName()) ?>" required>
+
+                <label for="familyName">Nom</label>
+                <input type="text" name="familyName" id="familyName" value="<?= htmlspecialchars((string) $item?->getFamilyName()) ?>" required>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="<?= htmlspecialchars((string) $item?->getEmail()) ?>">
+
+                <label for="phone">Téléphone</label>
+                <input type="text" name="phone" id="phone" value="<?= htmlspecialchars((string) $item?->getPhone()) ?>">
+
+                <label for="birthdate">Date de naissance</label>
+                <input type="text" name="birthdate" id="birthdate" value="<?= htmlspecialchars((string) $item?->getBirthdate()) ?>">
+
+                <label for="github">GitHub</label>
+                <input type="url" name="github" id="github" value="<?= htmlspecialchars((string) $item?->getGithub()) ?>">
+
+                <label for="linkedin">LinkedIn</label>
+                <input type="url" name="linkedin" id="linkedin" value="<?= htmlspecialchars((string) $item?->getLinkedin()) ?>">
+
+                <label for="cv">Lien du CV</label>
+                <input type="text" name="cv" id="cv" value="<?= htmlspecialchars((string) $item?->getCv()) ?>">
+
+                <label for="password">Nouveau mot de passe</label>
+                <input type="password" name="password" id="password">
+
+                <label for="user-description-editor">Description</label>
+                <div
+                    id="user-description-editor"
+                    class="quill-editor"
+                    data-quill-editor
+                    data-quill-target="#user-description-input"
+                ><?= $item?->getDescription() ?? '' ?></div>
+                <input
+                    type="hidden"
+                    name="description"
+                    id="user-description-input"
+                    value="<?= htmlspecialchars((string) ($item?->getDescription() ?? ''), ENT_QUOTES) ?>"
+                >
+
+                <button type="submit" class="button-primary">Enregistrer</button>
+            </form>
+        <?php elseif ($type === 'category') : ?>
+            <form action="index.php?page=save_category" method="post" class="form-grid">
+                <input type="hidden" name="id" value="<?= htmlspecialchars((string) $item?->getId()) ?>">
+                <label for="category-name">Nom</label>
+                <input type="text" name="name" id="category-name" value="<?= htmlspecialchars((string) $item?->getName()) ?>" required>
+                <button type="submit" class="button-primary">Enregistrer</button>
+            </form>
+        <?php elseif ($type === 'skill') : ?>
+            <form action="index.php?page=save_skill" method="post" class="form-grid">
+                <input type="hidden" name="id" value="<?= htmlspecialchars((string) $item?->getId()) ?>">
+                <label for="skill-name">Nom</label>
+                <input type="text" name="name" id="skill-name" value="<?= htmlspecialchars((string) $item?->getName()) ?>" required>
+                <label for="skill-level">Niveau</label>
+                <input type="number" name="level" id="skill-level" min="1" max="100" value="<?= htmlspecialchars((string) $item?->getLevel()) ?>" required>
+                <button type="submit" class="button-primary">Enregistrer</button>
+            </form>
+        <?php else : ?>
+            <form action="index.php?page=save_project" method="post" class="form-grid">
+                <input type="hidden" name="id" value="<?= htmlspecialchars((string) $item?->getId()) ?>">
+                <label for="project-name">Nom du projet</label>
+                <input type="text" name="name" id="project-name" value="<?= htmlspecialchars((string) $item?->getName()) ?>" required>
+
+                <label for="project-description-editor">Description</label>
+                <div
+                    id="project-description-editor"
+                    class="quill-editor"
+                    data-quill-editor
+                    data-quill-target="#project-description-input"
+                ><?= $item?->getDescription() ?? '' ?></div>
+                <input
+                    type="hidden"
+                    name="description"
+                    id="project-description-input"
+                    value="<?= htmlspecialchars((string) ($item?->getDescription() ?? ''), ENT_QUOTES) ?>"
+                    required
+                >
+
+                <label for="project-category">Catégorie</label>
+                <select name="category_id" id="project-category" required>
+                    <option value="">Choisir</option>
+                    <?php foreach ($categories as $category) : ?>
+                        <option value="<?= (int) $category->getId() ?>" <?= $item?->getCategoryId() === $category->getId() ? 'selected' : '' ?>>
+                            <?= htmlspecialchars((string) $category->getName()) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="primary-skill">Compétence principale</label>
+                <select name="primary_skill_id" id="primary-skill" required>
+                    <option value="">Choisir</option>
+                    <?php foreach ($skills as $skill) : ?>
+                        <option value="<?= (int) $skill->getId() ?>" <?= $item?->getPrimarySkillId() === $skill->getId() ? 'selected' : '' ?>>
+                            <?= htmlspecialchars((string) $skill->getName()) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label>Compétences liées</label>
+                <?php $projectSkillIds = array_map(fn($skill) => $skill->getId(), $item?->getSkills() ?? []); ?>
+                <div class="checkbox-grid skill-checkboxes">
+                    <?php foreach ($skills as $skill) : ?>
+                        <label class="checkbox-card">
+                            <input type="checkbox" name="skill_ids[]" value="<?= (int) $skill->getId() ?>" <?= in_array($skill->getId(), $projectSkillIds, true) ? 'checked' : '' ?>>
+                            <span><?= htmlspecialchars((string) $skill->getName()) ?> <small>- <?= (int) $skill->getLevel() ?>%</small></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
+
+                <label>Images du projet</label>
+                <?php $projectPictures = $item?->getPictures() ?? []; ?>
+                <div class="pictures-fieldset" id="pictures-fieldset">
+                    <?php if (!empty($projectPictures)) : ?>
+                        <?php foreach ($projectPictures as $pictureIndex => $picture) : ?>
+                            <div class="picture-row">
+                                <input type="text" name="image_paths[]" value="<?= htmlspecialchars((string) $picture->getImagePath()) ?>" placeholder="assets/images/mon-projet.jpg">
+                                <input type="text" name="image_alts[]" value="<?= htmlspecialchars((string) $picture->getImageAlt()) ?>" placeholder="Texte alternatif">
+                                <button type="button" class="button-secondary picture-remove">Supprimer</button>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <div class="picture-row">
+                            <input type="text" name="image_paths[]" value="" placeholder="assets/images/mon-projet.jpg">
+                            <input type="text" name="image_alts[]" value="" placeholder="Texte alternatif">
+                            <button type="button" class="button-secondary picture-remove">Supprimer</button>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <button type="button" class="button-secondary add-picture-button" id="add-picture-button">Ajouter une image</button>
+                <template id="picture-row-template">
+                    <div class="picture-row">
+                        <input type="text" name="image_paths[]" value="" placeholder="assets/images/mon-projet.jpg">
+                        <input type="text" name="image_alts[]" value="" placeholder="Texte alternatif">
+                        <button type="button" class="button-secondary picture-remove">Supprimer</button>
+                    </div>
+                </template>
+
+                <button type="submit" class="button-primary">Enregistrer</button>
+            </form>
+        <?php endif; ?>
+    </section>
+</div>

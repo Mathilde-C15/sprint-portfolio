@@ -2,131 +2,75 @@
 
 namespace Models;
 
-class User {
-    private int $id;
-    private int $phone;
-    private string $email;
-    private string $name;
-    private string $familyName;
-    private string $password;
-    private string $description;
-    private date $birthdate;
-    private string $github;
-    private string $linkedin;
-    private string $cv;
-    private int $idPicture;
-
-    public function __construct(int $id, 
-                                int $phone, 
-                                string $email,
-                                string $name, 
-                                string $familyName, 
-                                string $password, 
-                                string $description, 
-                                date $birthdate, 
-                                string $github, 
-                                string $linkedin, 
-                                string $cv) {
-        $this->id = $id;
-        $this->phone = $phone;
-        $this->email = $email;
-        $this->name = $name;
-        $this->familyName = $familyName;
-        $this->password = $password;
-        $this->description = $description;
-        $this->birthdate = $birthdate;
-        $this->github = $github;
-        $this->linkedin = $linkedin;
-        $this->cv = $cv;
+// Représente l'utilisateur
+class User extends AbstractModel{
+    public function __construct(
+        private ?string $email = null,
+        private ?string $phone = null,
+        private ?string $name = null,
+        private ?string $familyName = null,
+        private ?string $password = null,
+        private ?string $description = null,
+        private ?string $birthdate = null,
+        private ?string $github = null,
+        private ?string $linkedin = null,
+        private ?string $cv = null,
+        private ?int $pictureId = null,
+        ?int $id = null
+    ) {
+        parent::__construct($id);
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
+    public function getEmail(): ?string { return $this->email; }
+    public function setEmail(?string $email): void { $this->email = $email; }
+    public function getPhone(): ?string { return $this->phone; }
+    public function setPhone(?string $phone): void { $this->phone = $phone; }
+    public function getName(): ?string { return $this->name; }
+    public function setName(?string $name): void { $this->name = $name; }
+    public function getFamilyName(): ?string { return $this->familyName; }
+    public function setFamilyName(?string $familyName): void { $this->familyName = $familyName; }
+    public function getPassword(): ?string { return $this->password; }
+    public function setPassword(?string $password): void { $this->password = $password; }
+    public function getDescription(): ?string { return $this->description; }
+    public function setDescription(?string $description): void { $this->description = $description; }
+    public function getBirthdate(): ?string { return $this->birthdate; }
+    public function setBirthdate(?string $birthdate): void { $this->birthdate = $birthdate; }
+    public function getGithub(): ?string { return $this->github; }
+    public function setGithub(?string $github): void { $this->github = $github; }
+    public function getLinkedin(): ?string { return $this->linkedin; }
+    public function setLinkedin(?string $linkedin): void { $this->linkedin = $linkedin; }
+    public function getCv(): ?string { return $this->cv; }
+    public function setCv(?string $cv): void { $this->cv = $cv; }
+    public function getPictureId(): ?int { return $this->pictureId; }
+    public function setPictureId(?int $pictureId): void { $this->pictureId = $pictureId; }
 
-    public function getPhone(): int {
-        return $this->phone;
-    }
+    public function validate(bool $checkPassword = false): array{
+        $errors = [];
 
-    public function getEmail(): string {
-        return $this->email;
-    }
+        if ($this->name === null || trim($this->name) === '') {
+            $errors[] = 'Le prénom est obligatoire.';
+        }
 
-    public function getName(): string {
-        return $this->name;
-    }
+        if ($this->familyName === null || trim($this->familyName) === '') {
+            $errors[] = 'Le nom est obligatoire.';
+        }
 
-    public function getFamilyName(): string {
-        return $this->familyName;
-    }
+        if ($this->email !== null && $this->email !== '' && !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'L\'email n\'est pas valide.';
+        }
 
-    public function getPassword(): string {
-        return $this->password;
-    }
+        if ($this->github !== null && $this->github !== '' && !filter_var($this->github, FILTER_VALIDATE_URL)) {
+            $errors[] = 'Le lien GitHub n\'est pas valide.';
+        }
 
-    public function getDescription(): string {
-        return $this->description;
-    }
+        if ($this->linkedin !== null && $this->linkedin !== '' && !filter_var($this->linkedin)) {
+            $errors[] = 'Le lien LinkedIn n\'est pas valide.';
+        }
 
-    public function getBirthdate(): date {
-        return $this->birthdate;
-    }
+        if ($checkPassword && ($this->password === null || mb_strlen($this->password) < 8)) {
+            $errors[] = 'Le mot de passe doit contenir au moins 8 caractères.';
+        }
 
-    public function getGithub(): string {
-        return $this->github;
-    }
-
-    public function getLinkedin(): string {
-        return $this->linkedin;
-    }
-
-    public function getCv(): string {
-        return $this->cv;
-    }
-
-    // Setters
-    public function setId(int $id): void {
-        $this->id = $id;
-    }
-
-    public function setPhone(int $phone): void {
-        $this->phone = $phone;
-    }
-
-    public function setEmail(string $email): void{
-        $this->email = $email;
-    }
-
-    public function setName(string $name): void {
-        $this->name = $name;
-    }
-
-    public function setFamilyName(string $familyName): void {
-        $this->familyName = $familyName;
-    }
-
-    public function setPassword(string $password): void {
-        $this->password = $password;
-    }
-
-    public function setDescription(string $description): void {
-        $this->description = $description;
-    }
-
-    public function setBirthdate($birthdate): void {
-        $this->birthdate = $birthdate;
-    }
-
-    public function setGithub(string $github): void {
-        $this->github = $github;
-    }
-
-    public function setLinkedin(string $linkedin): void {
-        $this->linkedin = $linkedin;
-    }
-
-    public function setCv(string $cv): void {
-        $this->cv = $cv;
+        return $errors;
     }
 }

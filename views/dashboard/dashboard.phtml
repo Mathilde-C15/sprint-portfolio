@@ -1,0 +1,35 @@
+<div class="page-dashboard">
+    <section class="dashboard-container panel">
+        <div>
+            <p class="eyebrow">Administration</p>
+            <h1>Dashboard</h1>
+        </div>
+        <a href="index.php?page=dashboard_edit&type=user" class="button-primary">Modifier le profil</a>
+    </section>
+
+    <section class="dashboard-stats cards-grid">
+        <article class="panel stat-card">
+            <h2><?= count($projects) ?></h2>
+            <p>Projet(s)</p>
+            <a href="index.php?page=dashboard_list&type=project">Gérer</a>
+        </article>
+        <article class="panel stat-card">
+            <h2><?= count($skills) ?></h2>
+            <p>Compétence(s)</p>
+            <a href="index.php?page=dashboard_list&type=skill">Gérer</a>
+        </article>
+        <article class="panel stat-card">
+            <h2><?= count($categories) ?></h2>
+            <p>Catégorie(s)</p>
+            <a href="index.php?page=dashboard_list&type=category">Gérer</a>
+        </article>
+    </section>
+
+    <section class="panel dashboard-profile-card">
+        <h2>Profil actuel</h2>
+        <p><strong>Nom :</strong> <?= htmlspecialchars(($user?->getName() ?? '') . ' ' . ($user?->getFamilyName() ?? '')) ?></p>
+        <p><strong>Email :</strong> <?= htmlspecialchars((string) ($user?->getEmail() ?? '')) ?></p>
+        <p><strong>Téléphone :</strong> <?= htmlspecialchars((string) ($user?->getPhone() ?? '')) ?></p>
+        <div class="wysiwyg-content"><?= $user?->getDescription() ?? '' ?></div>
+    </section>
+</div>

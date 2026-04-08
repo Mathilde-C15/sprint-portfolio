@@ -1,42 +1,97 @@
-<!-- Profile -->
-<section class="profil">
-    <h1>Qui suis-je</h1>
-    <div class="profil-container">
-        <div class="description">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id sapiente vitae amet saepe voluptatibus culpa et eveniet facere. Deserunt ullam dolorum voluptatem officia minus maxime tempore esse molestias fugiat neque, corrupti facilis aperiam minima magni accusantium voluptate tenetur a, facere autem sunt commodi? Veritatis inventore, porro perferendis sapiente molestiae mollitia?.</p>
-
-            <a href="#contact"class="contact-btn">Me contacter</a>
-        </div>
-
-        <div class="profil-image">
-            <img src="./assets/images/logo-portfolio.svg" alt="profil">
-        </div>
-    </div>
-</section>
-
-<!-- Projets -->
-
-
-<!-- Compétences -->
-
-
-<!-- Contact -->
- <section class="contact" id="contact">
-     <div class="contact-container">
-        <h1>Me contacter</h1>
-        <form action="" method="post">
-            <label for="name">Votre nom :</label>
-            <input type="text" name="name" placeholder="Nom">
-            <label for="email">Votre email :</label>
-            <input type="email" name="email" placeholder="Email">
-            <label for="message">Votre message :</label>
-            <textarea name="message" placeholder="Message"></textarea>
-            <div class="form-button-container">
-                <input class="form-button" type="submit" value="Envoyer">
+<div class="page-home">
+    <section class="container-section panel" id="about">
+        <div class="container-text">
+            <p class="eyebrow">Développeuse web</p>
+            <h1><?= htmlspecialchars(($user?->getName() ?? 'Mathilde') . ' ' . ($user?->getFamilyName() ?? 'Cotelle')) ?></h1>
+            <div class="wysiwyg-content">
+                <?= $user?->getDescription() ?: '<p>Bienvenue sur mon portfolio. Vous trouverez ici mes projets, mes compétences et mes liens de contact.</p>' ?>
             </div>
-        </form>
-    </div>
-    <div class="cv">
-        <btn href="./assets/documents/CV-Mathilde-Cotelle.pdf" download>Télécharger mon CV</a>
-    </div>
- </section>
+            <div class="container-actions">
+                <a href="#projects" class="button-primary">Voir mes projets</a>
+                <a href="#contact" class="button-secondary">Me contacter</a>
+            </div>
+        </div>
+        <div class="container-visual">
+            <img src="assets/images/logo-portfolio.svg" alt="Illustration portfolio">
+        </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+        <div class="section-title-row">
+            <div>
+                <h2>Mes projets</h2>
+            </div>
+            <select id="category-filter" class="filter-select">
+                <option value="all">Toutes les catégories</option>
+                <?php foreach ($categories as $category) : ?>
+                    <option value="<?= (int) $category->getId() ?>"><?= htmlspecialchars((string) $category->getName()) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="cards-grid project-grid">
+            <?php foreach ($projects as $project) : ?>
+                <article class="project-card panel" data-category="<?= (int) ($project->getCategoryId() ?? 0) ?>">
+                    <?php if ($project->getPicture() !== null) : ?>
+                        <img src="<?= htmlspecialchars((string) $project->getPicture()->getImagePath()) ?>" alt="<?= htmlspecialchars((string) $project->getPicture()->getImageAlt()) ?>" class="project-image">
+                    <?php else : ?>
+                        <div class="project-placeholder">Projet</div>
+                    <?php endif; ?>
+
+                    <div class="project-content">
+                        <p class="project-category"><?= htmlspecialchars((string) ($project->getCategory()?->getName() ?? 'Sans catégorie')) ?></p>
+                        <h3><?= htmlspecialchars((string) $project->getName()) ?></h3>
+                        <p><?= htmlspecialchars(mb_strimwidth(strip_tags((string) $project->getDescription()), 0, 180, '...')) ?></p>
+
+                        <?php if (!empty($project->getSkills())) : ?>
+                            <div class="tag-list">
+                                <?php foreach ($project->getSkills() as $skill) : ?>
+                                    <span><?= htmlspecialchars((string) $skill->getName()) ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <a href="index.php?page=project&id=<?= (int) $project->getId() ?>" class="project-link">Voir le détail</a>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="skills-section" id="skills">
+        <div class="section-title-row">
+            <div>
+                <h2>Compétences</h2>
+            </div>
+        </div>
+
+        <div class="cards-grid skill-grid">
+            <?php foreach ($skills as $skill) : ?>
+                <article class="skill-card panel">
+                    <h3><?= htmlspecialchars((string) $skill->getName()) ?></h3>
+                    <div class="skill-bar">
+                        <div class="skill-bar-fill" style="width: <?= (int) $skill->getLevel() ?>%"></div>
+                    </div>
+                    <p><?= (int) $skill->getLevel() ?>%</p>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="panel contact-panel">
+            <div>
+                <h2 id="contact">Me contacter</h2>
+                <p>Vous pouvez me contacter via les liens présents ci-dessous.</p>
+            </div>
+
+            <div class="contact-links">
+                <?php if ($user?->getEmail()) : ?><a href="mailto:<?= htmlspecialchars($user->getEmail()) ?>"><?= htmlspecialchars($user->getEmail()) ?></a><?php endif; ?>
+                <?php if ($user?->getPhone()) : ?><a href="tel:<?= htmlspecialchars($user->getPhone()) ?>"><?= htmlspecialchars($user->getPhone()) ?></a><?php endif; ?>
+                <?php if ($user?->getGithub()) : ?><a href="<?= htmlspecialchars($user->getGithub()) ?>" target="_blank">GitHub</a><?php endif; ?>
+                <?php if ($user?->getLinkedin()) : ?><a href="<?= htmlspecialchars($user->getLinkedin()) ?>" target="_blank">LinkedIn</a><?php endif; ?>
+                <?php if ($user?->getCv()) : ?><a href="<?= htmlspecialchars($user->getCv()) ?>" target="_blank">Télécharger mon CV</a><?php endif; ?>
+            </div>
+        </div>
+    </section>
+</div>

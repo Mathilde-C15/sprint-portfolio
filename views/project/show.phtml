@@ -1,0 +1,51 @@
+<section class="project-detail panel page-project">
+    <div class="project-detail-header">
+        <div>
+            <p class="eyebrow"><?= htmlspecialchars((string) ($project->getCategory()?->getName() ?? 'Projet')) ?></p>
+            <h1><?= htmlspecialchars((string) $project->getName()) ?></h1>
+        </div>
+        <a href="index.php#projects" class="button-secondary">Retour à l'accueil</a>
+    </div>
+
+    <?php $pictures = $project->getPictures(); ?>
+    <?php if (!empty($pictures)) : ?>
+        <div class="project-gallery">
+            <div class="project-gallery-main">
+                <img
+                    src="<?= htmlspecialchars((string) $pictures[0]->getImagePath()) ?>"
+                    alt="<?= htmlspecialchars((string) $pictures[0]->getImageAlt()) ?>"
+                    class="project-detail-image"
+                    id="project-detail-main-image"
+                >
+            </div>
+
+            <?php if (count($pictures) > 1) : ?>
+                <div class="project-gallery-thumbnails">
+                    <?php foreach ($pictures as $index => $picture) : ?>
+                        <button
+                            type="button"
+                            class="project-thumb <?= $index === 0 ? 'is-active' : '' ?>"
+                            data-gallery-thumb
+                            data-image-src="<?= htmlspecialchars((string) $picture->getImagePath()) ?>"
+                            data-image-alt="<?= htmlspecialchars((string) $picture->getImageAlt()) ?>"
+                        >
+                            <img src="<?= htmlspecialchars((string) $picture->getImagePath()) ?>" alt="<?= htmlspecialchars((string) $picture->getImageAlt()) ?>">
+                        </button>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="project-description">
+        <p><?= nl2br(htmlspecialchars((string) $project->getDescription())) ?></p>
+    </div>
+
+    <?php if (!empty($project->getSkills())) : ?>
+        <div class="tag-list detail-tags">
+            <?php foreach ($project->getSkills() as $skill) : ?>
+                <span><?= htmlspecialchars((string) $skill->getName()) ?> - <?= (int) $skill->getLevel() ?>%</span>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</section>

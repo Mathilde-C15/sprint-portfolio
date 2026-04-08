@@ -1,0 +1,245 @@
+@use 'variables' as v;
+
+.page-dashboard {
+  padding: 1rem;
+
+  .dashboard-container,
+  .dashboard-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    background: v.$panel;
+    color: v.$text-dark;
+  }
+
+  .dashboard-stats,
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+    margin: 2em 0;
+  }
+
+  .dashboard-content,
+  .dashboard-profile-card,
+  .edit-panel,
+  .listing-panel {
+    margin-top: 1rem;
+  }
+
+  .stat-card,
+  .dashboard-profile-card,
+  .edit-panel,
+  .listing-panel,
+  .dashboard-table-wrapper {
+    background: v.$panel;
+    color: v.$text-dark;
+  }
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+
+    a {
+      color: #7b4d4d;
+      font-weight: 700;
+    }
+
+    .wysiwyg-content {
+      color: v.$text-dark;
+    }
+  }
+
+  .dashboard-profile-card {
+    .wysiwyg-content {
+      color: v.$text-dark;
+    }
+  }
+
+  .checkbox-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .checkbox-card {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.95rem;
+    background: rgba(236, 243, 232, 0.75);
+    border: 1px solid rgba(66, 87, 64, 0.18);
+
+    input {
+      width: auto;
+      margin: 0;
+    }
+
+    span {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+  }
+
+  .pictures-fieldset {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .picture-row {
+    display: grid;
+    gap: 0.75rem;
+    padding: 0.9rem;
+    border-radius: 1rem;
+    background: rgba(236, 243, 232, 0.45);
+    border: 1px solid rgba(66, 87, 64, 0.16);
+  }
+
+  .add-picture-button {
+    justify-self: stretch;
+  }
+
+  .dashboard-table {
+    display: block;
+    width: 100%;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    tr {
+      display: grid;
+      gap: 0.6rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: rgba(236, 243, 232, 0.45);
+      border: 1px solid rgba(66, 87, 64, 0.16);
+    }
+
+    td {
+      display: block;
+      padding: 0;
+      border: none;
+      color: v.$text-dark;
+
+      &::before {
+        display: block;
+        margin-bottom: 0.15rem;
+        font-size: 0.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #51614f;
+      }
+
+      &:nth-child(1)::before {
+        content: 'ID';
+      }
+
+      &:nth-child(2)::before {
+        content: 'Nom';
+      }
+
+      &:nth-child(3)::before {
+        content: 'Infos';
+      }
+
+      &:nth-child(4)::before {
+        content: 'Actions';
+      }
+    }
+  }
+
+  .table-actions {
+    flex-direction: column;
+    align-items: flex-start;
+
+    a {
+      color: #7b4d4d;
+      font-weight: 700;
+    }
+  }
+
+  .edit-panel,
+  .listing-panel {
+    .wysiwyg-content {
+      color: v.$text-dark;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .picture-row {
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+    }
+
+    .add-picture-button {
+      justify-self: start;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .dashboard-container,
+    .dashboard-toolbar {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dashboard-stats,
+    .checkbox-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-table {
+      display: table;
+      border-collapse: collapse;
+
+      thead {
+        display: table-header-group;
+      }
+
+      tbody {
+        display: table-row-group;
+      }
+
+      tr {
+        display: table-row;
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        background: transparent;
+      }
+
+      th,
+      td {
+        padding: 0.9rem 0.6rem;
+        border-bottom: 1px solid rgba(66, 87, 64, 0.16);
+        text-align: left;
+        vertical-align: top;
+        color: v.$text-dark;
+      }
+
+      td::before {
+        display: none;
+      }
+    }
+
+    .table-actions {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .dashboard-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+}
